@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use HGraphML, please cite this software."
+type: software
+title: "HGraphML"
+abstract: "A pre-alpha research package demonstrating trainable quotient-tower-backed graph message passing using state_collapser."
+authors:
+  - family-names: "Foster"
+    given-names: "Tyler"
+version: "0.1.0"
+date-released: "2026-05-25"
+license: "MIT"
+repository-code: "https://github.com/TYLERSFOSTER/HGraphML"
+url: "https://github.com/TYLERSFOSTER/HGraphML"
+keywords:
+  - "graph machine learning"
+  - "message passing"
+  - "quotient graph"
+  - "state_collapser"
+  - "PyTorch"
+  - "research software"
