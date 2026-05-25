@@ -109,15 +109,10 @@ uv run --extra dev ruff check .
 uv run --extra dev mypy
 ```
 
-The current development setup expects a sibling checkout of `state_collapser`:
-
-```text
-../state_collapser
-```
-
-That local editable source is declared in `pyproject.toml` for `uv` workflows.
-Once `state-collapser` and `hgraphml` are both published in the required form,
-this can become a normal package installation path.
+`state-collapser` is a package dependency declared in `pyproject.toml`.
+For this lightweight GitHub research release, the dependency is pinned to the
+public `state_collapser` `v0.5.0` tag. Before a PyPI release, that should become
+a normal registry dependency after `state-collapser` is published there.
 
 ## Quick Start
 

@@ -106,6 +106,57 @@ flat message passing.
   actual package surface. The quickstart should always run from a fresh checkout
   with the documented commands.
 
+### Required Before Any Speed-Up Or Scaling Claim
+
+Do not claim that `HGraphML` accelerates graph ML until the repository contains
+a benchmark surface that can make that statement measurable and falsifiable.
+The toy learned-lift demo proves trainability, not speed.
+
+A credible speed-up or scaling claim requires at least:
+
+- ***A flat baseline:*** Implement direct fine-graph message passing beside the
+  quotient-tower path, using comparable PyTorch code and comparable tensor
+  shapes. The baseline must be part of the same benchmark harness, not an
+  informal external comparison.
+- ***A quotient path:*** Measure the actual HGraphML path end to end: tower
+  bundle acquisition, coarse message passing, lift, fine readout, loss,
+  backward pass, and optimizer step when training is included.
+- ***Timing decomposition:*** Report separate timings for tower construction or
+  reuse, coarse pass, lift, readout, backward pass, and full train step. A
+  quotient method can only be understood if its overheads are visible.
+- ***Controlled graph families:*** Benchmark repeated motifs, nearly repeated
+  motifs, sparse bridges, dense local neighborhoods, bad-collapse controls, and
+  graphs where quotienting should not help. The package needs to show where the
+  idea wins, where it ties, and where it loses.
+- ***Schema comparisons:*** Compare contraction schemas and tier choices. A
+  speed-up claim should name the schema assumptions under which it holds.
+- ***Repeated runs and seeds:*** Run repeated trials with fixed seed reporting.
+  Single-run timing anecdotes are not enough.
+- ***Negative controls:*** Include graph families and schemas where quotienting
+  should add overhead or fail to help. If the benchmark only contains friendly
+  examples, the result is not credible.
+- ***Memory measurements:*** Track memory where practical, especially when
+  comparing cached tower/fiber structures against flat message passing.
+- ***Artifact output:*** Emit machine-readable benchmark records containing
+  graph family, size, edge count, schema, tier, lift, model dimensions, seed,
+  timing breakdown, memory fields where available, package version, and git
+  commit.
+- ***Public documentation:*** Publish the benchmark command, artifact schema,
+  and interpretation rules before using benchmark language in README, release
+  notes, papers, or outreach.
+
+Until this exists, safe wording is:
+
+```text
+HGraphML demonstrates trainable quotient-tower-backed graph message passing.
+```
+
+Unsafe wording is:
+
+```text
+HGraphML speeds up graph ML.
+```
+
 ### Non-Critical TODO
 
 - Add richer examples for multiple contraction schemas.
@@ -126,7 +177,7 @@ The project uses:
 - Python `>=3.11,<3.13`,
 - `uv` for the current local workflow,
 - PyTorch,
-- a sibling editable checkout of `state_collapser` during local development.
+- `state-collapser` as a declared package dependency.
 
 Recommended local setup:
 
@@ -134,15 +185,11 @@ Recommended local setup:
 uv sync --extra dev --group dev
 ```
 
-The current `uv` source configuration expects:
-
-```text
-../state_collapser
-```
-
-to exist relative to the `HGraphML` repository. If you are not working in that
-layout, install a compatible `state-collapser` package or adjust your local
-development environment without committing machine-specific paths.
+For the lightweight GitHub research release, `state-collapser` is pinned to a
+public upstream tag in `pyproject.toml`. Before a PyPI release, prefer switching
+that to a normal registry dependency after `state-collapser` is published there.
+If you need to test against an unpublished local upstream change, keep that
+override local and do not commit machine-specific paths.
 
 ## Local Validation
 

@@ -47,7 +47,6 @@ Created:
 pyproject.toml
 src/hgraphml/
 tests/
-uv.lock
 ```
 
 Package metadata:
@@ -57,7 +56,9 @@ Package metadata:
 - Python: `>=3.11,<3.13`,
 - build backend: `hatchling`,
 - runtime dependencies: `torch`, `state-collapser`,
-- local development source: `../state_collapser` editable through `uv`.
+- local development source: an unpublished `state_collapser` checkout was used
+  during initial implementation; committed public-release metadata should not
+  assume any machine-specific sibling path.
 
 Development tooling:
 
