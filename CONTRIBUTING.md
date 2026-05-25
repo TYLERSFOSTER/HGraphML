@@ -59,33 +59,52 @@ that surface upstream in `state_collapser` rather than reimplementing it locally
 ## Current Project Roadmap
 
 `HGraphML` is currently moving from first viability proof toward public-release
-readiness.
+readiness. The main technical gap is not another toy demo. The main technical
+gap is serious benchmarking: the package needs controlled evidence about when
+quotient-tower message passing is cheaper, comparable, or worse than direct
+flat message passing.
 
 ### Critical TODO
 
+- ***Serious benchmarking:*** Build the benchmark surface that can justify the
+  package beyond trainability. HGraphML needs controlled graph families,
+  repeatable benchmark commands, flat-vs-quotient comparisons, tower-build cost
+  accounting, lift/readout cost accounting, train-step timing, memory
+  measurements where practical, schema comparisons, and artifact output. No
+  public speed-up claim should be made until this exists.
+- ***Benchmark-oriented graph families:*** Add graph generators that stress the
+  quotient idea in different ways: repeated motifs, nearly repeated motifs,
+  sparse bridges, dense local neighborhoods, bad-collapse controls, and graphs
+  where quotienting should not help. These should make it possible to see both
+  wins and failures.
+- ***Benchmark baselines:*** Implement direct flat message-passing baselines
+  next to quotient-tower message passing. Benchmarks should separate at least:
+  tower construction, coarse message pass, lift, fine readout, backward pass,
+  and full train step.
+- ***Benchmark artifacts:*** Add structured benchmark outputs, not just terminal
+  prints. At minimum, runs should emit machine-readable records containing graph
+  family, graph size, schema, tier choice, lift type, seed, timing, message
+  shapes, and package/git metadata.
+- ***Adapter compatibility:*** Document and test the supported
+  `state_collapser` version range. If HGraphML needs a more stable tower/fiber
+  readout API, add that upstream rather than introducing a local fallback tower.
+- ***Real graph ML example:*** Add a first non-toy example, preferably a small
+  belief-propagation or factor-graph-style message-passing problem. This should
+  be chosen partly because it can become a meaningful benchmark case, not merely
+  another demonstration script.
+- ***Lift semantics:*** Clarify exact-vs-approximate lift semantics for uniform
+  pullback, fiber-normalized disintegration, and learned lifts. Tests should
+  distinguish algebraic exactness checks from approximation/training checks.
+- ***Batch/device surfaces:*** Define conventions for batching, tensor devices,
+  dtype movement, and reusable tower bundles across train/eval loops.
+- ***Framework adapters:*** Decide whether the first serious adapter should be
+  PyTorch Geometric, DGL, NetworkX, or a small explicit factor-graph surface.
 - ***Public release basics:*** Add or verify CI, package metadata, repository
   URLs, release tags, PyPI publishing configuration, and a changelog before
   claiming a public package release.
 - ***README and quickstart hardening:*** Keep the root README aligned with the
   actual package surface. The quickstart should always run from a fresh checkout
   with the documented commands.
-- ***Adapter compatibility:*** Document and test the supported
-  `state_collapser` version range. If HGraphML needs a more stable tower/fiber
-  readout API, add that upstream rather than introducing a local fallback tower.
-- ***Real graph ML example:*** Add a first non-toy example, preferably a small
-  belief-propagation or factor-graph-style message-passing problem.
-- ***Lift semantics:*** Clarify exact-vs-approximate lift semantics for uniform
-  pullback, fiber-normalized disintegration, and learned lifts. Tests should
-  distinguish algebraic exactness checks from approximation/training checks.
-- ***Benchmarking:*** Build a benchmark harness comparing flat message passing
-  with quotient message passing on controlled graph families. No speed-up claim
-  should be made until this exists.
-- ***Batch/device surfaces:*** Define conventions for batching, tensor devices,
-  dtype movement, and reusable tower bundles across train/eval loops.
-- ***Framework adapters:*** Decide whether the first serious adapter should be
-  PyTorch Geometric, DGL, NetworkX, or a small explicit factor-graph surface.
-- ***Diagnostics and artifacts:*** Add structured benchmark/training artifacts
-  so results can be inspected rather than hand-read from terminal output.
 
 ### Non-Critical TODO
 
