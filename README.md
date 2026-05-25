@@ -17,7 +17,7 @@
   </a> -->
   <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue" alt="Python 3.11 | 3.12">
   <a href="https://github.com/TYLERSFOSTER/HGraphML/releases">
-    <img src="https://img.shields.io/github/v/release/TYLERSFOSTER/HGraphML?label=release" alt="Release">
+    <img src="https://img.shields.io/github/v/release/TYLERSFOSTER/HGraphML?label=release&color=blue" alt="Release">
   </a>
   <!-- <a href="https://github.com/TYLERSFOSTER/HGraphML/issues">
     <img src="https://img.shields.io/github/issues/TYLERSFOSTER/HGraphML" alt="GitHub issues">

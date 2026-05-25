@@ -801,3 +801,47 @@ but a real trainable quotient-tower-backed graph message-passing package.
 That is already a meaningful proof of Malik's observation. The next test is
 whether the same architecture can produce measured wins, losses, and tradeoffs
 under serious benchmark conditions.
+
+## Final Release Closure Addendum
+
+After the main body of this report was written, the HGraphML public beta release
+sequence was closed out.
+
+The repository now has a GitHub Release for `v0.1.0` titled
+`HGraphML v0.1.0: Trainable Quotient-Tower Graph Message Passing`. This is the
+correct version posture for the project: public beta / research-mode release,
+not a mature graph-ML framework release and not a benchmark-backed acceleration
+claim.
+
+The `v0.1.0` tag identifies the first public research baseline. Public `main`
+has subsequently advanced with release-support cleanup, including citation
+metadata. This is acceptable: the tag remains the release anchor, while `main`
+continues normal post-release hardening.
+
+The dependency posture was corrected so HGraphML consumes public
+`state_collapser` release infrastructure rather than relying on a local path.
+The important compatibility fact is that HGraphML should continue to exercise
+`state_collapser` through its public quotient-tower/readout surfaces, not by
+forking or reimplementing upstream tower logic locally.
+
+The release-badge concern was also clarified. The GitHub release badge resolves
+against the public `v0.1.0` release; the remaining issue was presentation color,
+not release absence. The README badge was normalized so the public page reads
+cleanly alongside the `state_collapser` badge row.
+
+A `CITATION.cff` file was added after the release so GitHub can surface a
+`Cite this repository` affordance and so readers have a canonical citation path
+for the HGraphML beta.
+
+The remaining release gaps are deliberately not hidden:
+
+- no PyPI release yet,
+- no serious benchmark suite yet,
+- no broad graph-ML framework adapter story yet,
+- no speed-up claim beyond the architectural motivation,
+- serious benchmarking remains the next major public-readiness milestone.
+
+PO attribution: the PO made the final release-posture decisions here, including
+treating HGraphML as a public beta, prioritizing serious benchmarking over PyPI,
+requiring explicit downstream/upstream separation from `state_collapser`, and
+requiring release-continuity notes after the final public release pass.
