@@ -31,7 +31,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "state-collapser @ git+https://github.com/TYLERSFOSTER/state_collapser.git@v0.5.0",
+  "state-collapser @ git+https://github.com/TYLERSFOSTER/state_collapser.git@v0.6.0",
   "torch>=2.4.0",
 ]
 

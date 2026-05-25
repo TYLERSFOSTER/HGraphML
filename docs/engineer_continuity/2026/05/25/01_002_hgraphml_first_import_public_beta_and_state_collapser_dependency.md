@@ -33,6 +33,10 @@ lightweight public-beta research package:
 - and the downstream dependency issue created by the later `state_collapser`
   public-history rewrite.
 
+Release-readiness follow-up: immediately after this report was first written,
+the dependency pin was updated from the now-deleted upstream `state_collapser`
+`v0.5.0` tag to the clean public `v0.6.0` tag.
+
 At the time of this report, `HGraphML` public `main` points at:
 
 ```text
@@ -618,7 +622,7 @@ from hgraphml import HGraphMLResult, __version__, collapse_messages
 
 ## Current Dependency Situation
 
-`pyproject.toml` currently declares:
+At the moment this report was first written, `pyproject.toml` declared:
 
 ```text
 state-collapser @ git+https://github.com/TYLERSFOSTER/state_collapser.git@v0.5.0
@@ -636,18 +640,19 @@ remote. The clean public upstream tag is now:
 state_collapser v0.6.0
 ```
 
-This means the current HGraphML dependency pin is stale and likely broken for
-fresh installs.
+This meant the HGraphML dependency pin was stale and likely broken for fresh
+installs.
 
-Immediate follow-up:
+Required follow-up:
 
 ```text
 Update pyproject.toml to point to state_collapser v0.6.0, regenerate dependency
 metadata if the project chooses to track it, then rerun HGraphML validation.
 ```
 
-Until that is done, treat HGraphML's public-beta package surface as
-conceptually ready but dependency-resolution stale.
+Release-readiness follow-up: this dependency pin has now been corrected to
+`state_collapser` `v0.6.0`. Treat HGraphML's public-beta package surface as
+conceptually ready pending final validation against the public upstream tag.
 
 ## Current Public Claims
 
@@ -684,7 +689,7 @@ HGraphML provides benchmark-proven acceleration.
 
 ### P0: Update state_collapser Dependency To v0.6.0
 
-This is the immediate cross-repo follow-up.
+This was the immediate cross-repo follow-up.
 
 Current:
 
@@ -698,7 +703,7 @@ Needed:
 state_collapser @ v0.6.0
 ```
 
-Then rerun:
+Release-readiness follow-up: this pin has been updated. Rerun:
 
 ```bash
 uv sync --extra dev --group dev
@@ -796,4 +801,3 @@ but a real trainable quotient-tower-backed graph message-passing package.
 That is already a meaningful proof of Malik's observation. The next test is
 whether the same architecture can produce measured wins, losses, and tradeoffs
 under serious benchmark conditions.
-

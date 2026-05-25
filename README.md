@@ -15,9 +15,7 @@
   <!-- <a href="https://pypi.org/project/hgraphml/">
     <img src="https://img.shields.io/pypi/v/hgraphml" alt="PyPI">
   </a> -->
-  <a href="https://pypi.org/project/hgraphml/">
-    <img src="https://img.shields.io/pypi/pyversions/hgraphml" alt="Python">
-  </a>
+  <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue" alt="Python 3.11 | 3.12">
   <a href="https://github.com/TYLERSFOSTER/HGraphML/releases">
     <img src="https://img.shields.io/github/v/release/TYLERSFOSTER/HGraphML?label=release" alt="Release">
   </a>
@@ -118,7 +116,7 @@ uv run --extra dev mypy
 
 `state-collapser` is a package dependency declared in `pyproject.toml`.
 For this lightweight GitHub research release, the dependency is pinned to the
-public `state_collapser` `v0.5.0` tag. Before a PyPI release, that should become
+public `state_collapser` `v0.6.0` tag. Before a PyPI release, that should become
 a normal registry dependency after `state-collapser` is published there.
 
 ## Quick Start
