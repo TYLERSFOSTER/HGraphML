@@ -217,4 +217,14 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-*.DS_Store
+# Local OS/editor noise
+.DS_Store
+**/.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local uv/cache directories
+.uv-cache/
+uv-cache/
