@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source srcset="assets/images/quotient_graph_dark.jpg" media="(prefers-color-scheme: dark)">
+    <source srcset="assets/images/quotient_graph_light.jpg" media="(prefers-color-scheme: light)">
+    <img src="assets/images/quotient_graph_light.jpg" alt="graph_quot" width="700">
+  </picture>
+</p>
 <h1 align="center"><strong>H</strong><em>ierarchical</em> • <strong>Graph</strong> • <strong>M</strong><em>achine</em> • <strong>L</strong><em>earning</em></br>(HGraphML)</h1>
 
 
