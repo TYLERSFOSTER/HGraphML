@@ -57,3 +57,8 @@ strict = true
 warn_unused_configs = true
 mypy_path = "src"
 packages = ["hgraphml"]
+
+[dependency-groups]
+dev = [
+    "numpy>=2.4.6",
+]
