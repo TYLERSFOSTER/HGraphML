@@ -120,6 +120,31 @@ with `state_collapser`, builds a partition tower, and returns an HGraphML-facing
 - edge fibers by tier,
 - coarse `TensorGraph` objects by tier.
 
+## Build An Encoding Registry
+
+```python
+from hgraphml.adapters import build_encoding_registry
+
+encoding_registry = build_encoding_registry(tower_bundle)
+```
+
+This builds the shared upstream `state_collapser` encoding vocabulary for the
+same partition tower that HGraphML uses for message passing. The registry can
+encode base states, base edges, state cells, action cells, tiers, and related
+tower metadata.
+
+The registry metadata is JSON-safe:
+
+```python
+import json
+
+json.dumps(encoding_registry.to_dict())
+```
+
+This is the current bridge toward tensorized HGraphML kernels. It is not an RL
+training-batch path: this usage does not require `ActionSelectionInput`,
+`TrainingTransition`, or `TorchDecisionBatch`.
+
 ## Create Message Model And Lift
 
 ```python

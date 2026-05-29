@@ -5,6 +5,21 @@ All notable changes to `HGraphML` will be documented here.
 This project follows semantic-versioning vocabulary, but early releases should
 be read as research milestones rather than stability promises.
 
+## Unreleased
+
+Tensorization compatibility bridge.
+
+- Updated the `state-collapser` dependency pin to the public `state_collapser`
+  `v0.7.0` tag.
+- Added `build_encoding_registry(...)`, a thin HGraphML adapter helper around
+  upstream `EncodingRegistry.from_tower(...)`.
+- Added compatibility tests covering registry construction, JSON-safe registry
+  metadata, base state and edge encodability, state-cell and action-cell
+  encodability, and HGraphML node/edge fiber coverage.
+- Documented that this is shared tower encoding compatibility for future
+  tensorization work, not full graph-message tensorization, RL transition
+  tensorization, or benchmark-backed speed-up.
+
 ## 0.1.0 - Research Viability Release
 
 Initial lightweight public research release.

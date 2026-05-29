@@ -58,11 +58,17 @@ that surface upstream in `state_collapser` rather than reimplementing it locally
 
 ## Current Project Roadmap
 
-`HGraphML` is currently moving from first viability proof toward public-release
-readiness. The main technical gap is not another toy demo. The main technical
-gap is serious benchmarking: the package needs controlled evidence about when
-quotient-tower message passing is cheaper, comparable, or worse than direct
-flat message passing.
+`HGraphML` has moved past the first trainability proof and public GitHub
+research release baseline. The current bridge has two real pieces:
+
+- trainable quotient-tower-backed graph message passing, and
+- compatibility with `state_collapser` `v0.7.0`'s shared `EncodingRegistry`.
+
+The next technical gap is turning that shared encoding vocabulary into useful
+graph-ML tensorization without pretending that HGraphML already has benchmarked
+tensorized kernels. Serious benchmarking remains a release-shaping requirement:
+the package needs controlled evidence about when quotient-tower message passing
+is cheaper, comparable, or worse than direct flat message passing.
 
 ### Critical TODO
 
@@ -85,9 +91,16 @@ flat message passing.
   prints. At minimum, runs should emit machine-readable records containing graph
   family, graph size, schema, tier choice, lift type, seed, timing, message
   shapes, and package/git metadata.
-- ***Adapter compatibility:*** Document and test the supported
-  `state_collapser` version range. If HGraphML needs a more stable tower/fiber
-  readout API, add that upstream rather than introducing a local fallback tower.
+- ***Tensorization bridge:*** Use the shared `EncodingRegistry` surface to
+  design HGraphML tensorization around upstream state, edge, state-cell,
+  action-cell, and tier IDs. This should remain shared tower encoding
+  compatibility, not a local reimplementation of `state_collapser`'s RL
+  tensorization stack.
+- ***Adapter compatibility:*** Keep the current `state_collapser` compatibility
+  contract explicit. HGraphML currently targets the public `state_collapser`
+  `v0.7.0` tag for `EncodingRegistry` support. If HGraphML needs a more stable
+  tower/fiber/readout API, add that upstream rather than introducing a local
+  fallback tower.
 - ***Real graph ML example:*** Add a first non-toy example, preferably a small
   belief-propagation or factor-graph-style message-passing problem. This should
   be chosen partly because it can become a meaningful benchmark case, not merely
@@ -96,12 +109,10 @@ flat message passing.
   pullback, fiber-normalized disintegration, and learned lifts. Tests should
   distinguish algebraic exactness checks from approximation/training checks.
 - ***Batch/device surfaces:*** Define conventions for batching, tensor devices,
-  dtype movement, and reusable tower bundles across train/eval loops.
+  dtype movement, reusable tower bundles across train/eval loops, and how
+  encoded tower IDs align with HGraphML tensors.
 - ***Framework adapters:*** Decide whether the first serious adapter should be
   PyTorch Geometric, DGL, NetworkX, or a small explicit factor-graph surface.
-- ***Public release basics:*** Add or verify CI, package metadata, repository
-  URLs, release tags, PyPI publishing configuration, and a changelog before
-  claiming a public package release.
 - ***README and quickstart hardening:*** Keep the root README aligned with the
   actual package surface. The quickstart should always run from a fresh checkout
   with the documented commands.
@@ -163,6 +174,7 @@ HGraphML speeds up graph ML.
 - Add visualization of coarse graphs, fibers, and lifted messages.
 - Add more learned-lift variants.
 - Add optional edge-feature examples.
+- Add docs showing how encoded tower IDs map onto graph-message tensors.
 - Add docs comparing `HGraphML` with direct flat message passing.
 - Add a glossary for quotient, fiber, lift, coarse tier, and fine tier terms.
 - Add an outreach-oriented conceptual explainer after the technical surface is
@@ -305,6 +317,9 @@ Before changing structural behavior, read the relevant design documents:
 - [docs/design/01_002_hgraphml_first_import_blueprint.md](./docs/design/01_002_hgraphml_first_import_blueprint.md)
 - [docs/design/01_003_hgraphml_first_import_implementation_gameplan.md](./docs/design/01_003_hgraphml_first_import_implementation_gameplan.md)
 - [docs/design/01_004_hgraphml_first_import_implementation_log.md](./docs/design/01_004_hgraphml_first_import_implementation_log.md)
+- [docs/design/tensorization/01_006_state_collapser_encoding_compatibility_blueprint.md](./docs/design/tensorization/01_006_state_collapser_encoding_compatibility_blueprint.md)
+- [docs/design/tensorization/01_007_state_collapser_encoding_compatibility_implementation_gameplan.md](./docs/design/tensorization/01_007_state_collapser_encoding_compatibility_implementation_gameplan.md)
+- [docs/design/tensorization/01_008_state_collapser_encoding_compatibility_implementation_log.md](./docs/design/tensorization/01_008_state_collapser_encoding_compatibility_implementation_log.md)
 
 For upstream quotient/tower semantics, consult `state_collapser` design docs
 and prefer upstream changes when the surface is not graph-ML-specific.
@@ -327,6 +342,8 @@ Contributions should preserve the current package style:
 Contributors should not silently:
 
 - reimplement `state_collapser` towers locally,
+- reimplement `state_collapser` encoding registries or RL tensor batches
+  locally,
 - turn quotient towers into decorative metadata,
 - detach learned-lift tensors in a way that breaks gradients,
 - claim speed-up from the toy viability demo,

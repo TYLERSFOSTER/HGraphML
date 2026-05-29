@@ -4,6 +4,20 @@
 
 Focused security audit for lightweight public release readiness.
 
+Superseded current-status note, 2026-05-29:
+
+- The lightweight GitHub research release happened at `v0.1.0`.
+- The dependency-visibility blocker described below has been resolved for the
+  current GitHub-research-release posture: HGraphML now pins public
+  `state_collapser` `v0.7.0`, and GitHub CI has passed against that dependency.
+- `uv.lock` has been reintroduced and now records the public `v0.7.0` Git tag,
+  not a local editable path.
+- The PyPI guidance below still applies: a future PyPI release should prefer a
+  normal registry dependency after `state-collapser` is published there.
+- The local-path rule remains current: committed files should not require,
+  reveal, or imply a local directory layout outside the HGraphML repository
+  root.
+
 Audit date:
 
 ```text

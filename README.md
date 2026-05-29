@@ -52,7 +52,8 @@ executable bridge toward hierarchical versions of graph ML methods such as
 
 This repository does not yet claim speed-up. The current milestone is stricter
 and smaller: prove that quotient-tower-backed graph message passing can sit
-inside a trainable PyTorch computation without breaking autograd.
+inside a trainable PyTorch computation without breaking autograd, while sharing
+`state_collapser`'s upstream encoding vocabulary for future tensorized kernels.
 
 ## Current Milestone
 
@@ -122,6 +123,14 @@ a normal registry dependency after `state-collapser` is published there.
 HGraphML also checks compatibility with state_collapser's shared
 `EncodingRegistry`, so a `TowerBundle` can be encoded through the upstream
 training vocabulary without routing through RL tensor batches.
+
+The encoding bridge is available directly from the adapter package:
+
+```python
+from hgraphml.adapters import build_encoding_registry
+
+registry = build_encoding_registry(tower_bundle)
+```
 
 ## Quick Start
 
@@ -268,6 +277,7 @@ What is solid enough to rely on:
 - package layout and typed source structure
 - local test/lint/type workflow
 - the first direct `state_collapser` adapter
+- shared `state_collapser` `EncodingRegistry` compatibility
 - deterministic lift baselines
 - learned lift trainability
 - end-to-end `collapse_messages(...)`
@@ -280,7 +290,7 @@ What should still be treated as unstable:
 - benchmark and speed-up claims
 - graph ML framework adapters
 - long-term naming of some surfaces
-- packaging/release workflow until the first public release is cut
+- packaging/release workflow beyond the lightweight GitHub research release
 
 ## Project Structure
 
@@ -325,6 +335,9 @@ Design and implementation docs:
 - [`docs/design/01_002_hgraphml_first_import_blueprint.md`](./docs/design/01_002_hgraphml_first_import_blueprint.md)
 - [`docs/design/01_003_hgraphml_first_import_implementation_gameplan.md`](./docs/design/01_003_hgraphml_first_import_implementation_gameplan.md)
 - [`docs/design/01_004_hgraphml_first_import_implementation_log.md`](./docs/design/01_004_hgraphml_first_import_implementation_log.md)
+- [`docs/design/tensorization/01_006_state_collapser_encoding_compatibility_blueprint.md`](./docs/design/tensorization/01_006_state_collapser_encoding_compatibility_blueprint.md)
+- [`docs/design/tensorization/01_007_state_collapser_encoding_compatibility_implementation_gameplan.md`](./docs/design/tensorization/01_007_state_collapser_encoding_compatibility_implementation_gameplan.md)
+- [`docs/design/tensorization/01_008_state_collapser_encoding_compatibility_implementation_log.md`](./docs/design/tensorization/01_008_state_collapser_encoding_compatibility_implementation_log.md)
 
 Related upstream package:
 

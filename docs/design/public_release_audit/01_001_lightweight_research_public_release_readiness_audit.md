@@ -4,6 +4,18 @@
 
 Hardcore repository audit for `HGraphML` public-release readiness.
 
+Superseded current-status note, 2026-05-29:
+
+- The lightweight GitHub research release happened at `v0.1.0`.
+- The live dependency pin has moved beyond this audit's `v0.5.0` references;
+  HGraphML now targets the public `state_collapser` `v0.7.0` tag.
+- A committed `uv.lock` is present again and points at the public `v0.7.0`
+  dependency, not a local editable checkout.
+- GitHub CI has passed on `main` after the `v0.7.0` compatibility update.
+- The current post-release bridge includes `EncodingRegistry` compatibility for
+  future tensorization work. The benchmark and speed-up cautions in this audit
+  still apply.
+
 Audit date:
 
 ```text

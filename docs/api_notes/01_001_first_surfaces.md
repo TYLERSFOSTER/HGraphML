@@ -156,7 +156,7 @@ src/hgraphml/adapters/state_collapser.py
 Import:
 
 ```python
-from hgraphml.adapters import TowerBundle, build_tower_bundle
+from hgraphml.adapters import TowerBundle, build_encoding_registry, build_tower_bundle
 ```
 
 Shape:
@@ -236,6 +236,15 @@ cells, action cells, tiers, and other registry metadata. It does not require
 surface, and it does not route through `TorchDecisionBatch`. That keeps the
 current HGraphML contract focused on tower/fiber compatibility rather than
 claiming RL batch tensorization support.
+
+The registry metadata is safe to serialize:
+
+```python
+import json
+
+registry = build_encoding_registry(tower_bundle)
+json.dumps(registry.to_dict())
+```
 
 ## Lift Interface
 
