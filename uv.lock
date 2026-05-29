@@ -141,7 +141,7 @@ requires-dist = [
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.18.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.13.0" },
-    { name = "state-collapser", git = "https://github.com/TYLERSFOSTER/state_collapser.git?rev=v0.6.0" },
+    { name = "state-collapser", git = "https://github.com/TYLERSFOSTER/state_collapser.git?rev=v0.7.0" },
     { name = "torch", specifier = ">=2.4.0" },
 ]
 provides-extras = ["dev"]
@@ -605,8 +605,8 @@ wheels = [
 
 [[package]]
 name = "state-collapser"
-version = "0.6.0"
-source = { git = "https://github.com/TYLERSFOSTER/state_collapser.git?rev=v0.6.0#b99d78a5073506994f82060124dca74826062c4b" }
+version = "0.7.0"
+source = { git = "https://github.com/TYLERSFOSTER/state_collapser.git?rev=v0.7.0#1b8eb84a43501d79ce44255aa1cc3b1f17d3248e" }
 dependencies = [
     { name = "pillow" },
 ]

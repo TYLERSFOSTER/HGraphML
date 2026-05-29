@@ -210,6 +210,33 @@ tier state-cell endpoints. This avoids exposing transient action-cell labels
 from the internal `state_collapser` action layer as stable HGraphML coarse-edge
 IDs.
 
+## State-Collapser Encoding Compatibility
+
+HGraphML uses `state_collapser` for quotient-tower construction. The shared
+encoding boundary is intentionally smaller than RL tensorization: HGraphML
+builds a `TowerBundle`, then exposes `build_encoding_registry(...)` as a thin
+wrapper around `EncodingRegistry.from_tower(...)`.
+
+Import:
+
+```python
+from hgraphml.adapters import build_encoding_registry
+```
+
+Signature:
+
+```python
+def build_encoding_registry(bundle: TowerBundle) -> EncodingRegistry:
+    ...
+```
+
+This produces the upstream shared tower encoding for states, edges, state
+cells, action cells, tiers, and other registry metadata. It does not require
+`ActionSelectionInput`, `TrainingTransition`, or either linearized transition
+surface, and it does not route through `TorchDecisionBatch`. That keeps the
+current HGraphML contract focused on tower/fiber compatibility rather than
+claiming RL batch tensorization support.
+
 ## Lift Interface
 
 Defined in:

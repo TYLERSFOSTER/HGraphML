@@ -11,6 +11,7 @@ from state_collapser.core.edges import BaseEdge
 from state_collapser.core.state import State
 from state_collapser.tower.partition import ContractionSchema, PartitionTower
 from state_collapser.tower.partition.tower import build_partition_tower_full
+from state_collapser.training import EncodingRegistry
 
 from hgraphml.graph import EdgeFiber, NodeFiber, TensorGraph
 
@@ -80,6 +81,12 @@ def build_tower_bundle(
         edge_fibers_by_tier=tuple(edge_fibers_by_tier),
         coarse_graphs_by_tier=tuple(coarse_graphs_by_tier),
     )
+
+
+def build_encoding_registry(bundle: TowerBundle) -> EncodingRegistry:
+    """Build the shared state_collapser encoding registry for a tower bundle."""
+
+    return EncodingRegistry.from_tower(bundle.partition_tower)
 
 
 def _edge_for_index(graph: TensorGraph, states: tuple[State, ...], edge_index: int) -> BaseEdge:

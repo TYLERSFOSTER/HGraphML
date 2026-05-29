@@ -61,6 +61,7 @@ The package currently provides:
 - a minimal `TensorGraph` surface for known directed graphs,
 - a direct `state_collapser` adapter that builds quotient towers from known
   graphs,
+- a shared `state_collapser` encoding-registry compatibility helper,
 - node-fiber and edge-fiber readouts from tower tiers,
 - deterministic uniform and fiber-normalized lifts,
 - a learned PyTorch lift,
@@ -116,8 +117,11 @@ uv run --extra dev mypy
 
 `state-collapser` is a package dependency declared in `pyproject.toml`.
 For this lightweight GitHub research release, the dependency is pinned to the
-public `state_collapser` `v0.6.0` tag. Before a PyPI release, that should become
+public `state_collapser` `v0.7.0` tag. Before a PyPI release, that should become
 a normal registry dependency after `state-collapser` is published there.
+HGraphML also checks compatibility with state_collapser's shared
+`EncodingRegistry`, so a `TowerBundle` can be encoded through the upstream
+training vocabulary without routing through RL tensor batches.
 
 ## Quick Start
 
@@ -234,7 +238,8 @@ The package currently contains real code for:
 - `hgraphml.graph`
   - `TensorGraph`, `NodeFiber`, `EdgeFiber`, and fiber-map aliases
 - `hgraphml.adapters`
-  - direct `state_collapser` tower construction and tensor-friendly fiber readouts
+  - direct `state_collapser` tower construction, shared encoding-registry
+    compatibility, and tensor-friendly fiber readouts
 - `hgraphml.messages`
   - message containers, edge MLP message passing, node pooling, and readout
 - `hgraphml.lifts`
